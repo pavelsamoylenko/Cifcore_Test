@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 
 namespace _App.Runtime.Web
 {
-    public interface IFactService
+    public interface IFactProvider
     {
         UniTask<List<BreedModel>> GetBreedsListAsync(CancellationToken cancellationToken);
 

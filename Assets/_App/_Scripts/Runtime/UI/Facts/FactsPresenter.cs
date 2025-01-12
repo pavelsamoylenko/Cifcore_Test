@@ -13,8 +13,7 @@ namespace _App.Runtime.UI.Facts
 {
     public class FactsPresenter : IFactsPresenter
     {
-        private readonly IFactService _factsService;
-        private readonly RequestQueueManager _queueManager;
+        private readonly IFactProvider _factsProvider;
         private readonly PopupService _popupService;
         
         private readonly ReactiveCollection<BreedModel> _facts = new();
@@ -32,10 +31,9 @@ namespace _App.Runtime.UI.Facts
         private CancellationTokenSource _elementCancellationToken = new();
 
         [Inject]
-        public FactsPresenter(IFactService factsService, RequestQueueManager queueManager, PopupService popupService)
+        public FactsPresenter(IFactProvider factsProvider, PopupService popupService)
         {
-            _factsService = factsService;
-            _queueManager = queueManager;
+            _factsProvider = factsProvider;
             _popupService = popupService;
         }
         
@@ -83,7 +81,7 @@ namespace _App.Runtime.UI.Facts
         {
             _isLoading.Value = true;
             _errorMessage.Value = string.Empty;
-            _queueManager.AddRequest(LoadFactsCommand);
+            LoadFactsCommand().Forget();
         }
 
         private void ElementClickedHandler(FactScrollElementView element)
@@ -93,7 +91,7 @@ namespace _App.Runtime.UI.Facts
             _elementCancellationToken?.Cancel();
             _elementCancellationToken?.Dispose();
             _elementCancellationToken = new CancellationTokenSource();
-            _queueManager.AddRequest(() => LoadSpecificCommand(element, _elementCancellationToken.Token));
+            LoadSpecificCommand(element, _elementCancellationToken.Token).Forget();
         }
 
         private async UniTask LoadSpecificCommand(FactScrollElementView element, CancellationToken token)
@@ -101,7 +99,7 @@ namespace _App.Runtime.UI.Facts
             try
             {
                 element.SetLoading(true);
-                var fact = await _factsService.GetBreedByIdAsync(element.Id, token);
+                var fact = await _factsProvider.GetBreedByIdAsync(element.Id, token);
                 element.SetLoading(false);
                 
                 if (fact.Attributes == null || fact.Attributes.Name.IsNullOrWhitespace() || fact.Attributes.Description.IsNullOrWhitespace())
@@ -133,7 +131,7 @@ namespace _App.Runtime.UI.Facts
         {
             try
             {
-                var breeds = await _factsService.GetBreedsListAsync(_cancellationTokenSource.Token);
+                var breeds = await _factsProvider.GetBreedsListAsync(_cancellationTokenSource.Token);
                 foreach (var breed in breeds)
                 {
                     _facts.Add(breed);

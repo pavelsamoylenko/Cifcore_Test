@@ -7,8 +7,8 @@ namespace _App.Runtime
     {
         public override void InstallBindings()
         {
-            Container.Bind<IWeatherService>().To<WeatherService>().FromNew().AsSingle().NonLazy();
-            Container.Bind<IFactService>().To<FactService>().FromNew().AsSingle().NonLazy();
+            Container.Bind<IWeatherProvider>().To<WeatherProvider>().FromNew().AsSingle().NonLazy();
+            Container.Bind<IFactProvider>().To<FactProvider>().FromNew().AsSingle().NonLazy();
         }
 
     }

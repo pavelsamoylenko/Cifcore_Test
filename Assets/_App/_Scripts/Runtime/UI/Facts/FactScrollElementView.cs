@@ -43,7 +43,7 @@ namespace _App.Runtime.UI.Facts
             {
                 item._model = model;
                 item._factNameText.text = model.Name;
-                item.transform.SetParent(parent);
+                item.transform.SetParent(parent, false);
                 item.Button.onClick.RemoveAllListeners();
             }
             
