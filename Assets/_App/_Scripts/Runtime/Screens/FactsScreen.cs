@@ -1,26 +1,27 @@
-using _App.Runtime.Controllers;
 using _App.Runtime.UI.Base;
-using _App.Runtime.UI.Presenters;
+using _App.Runtime.UI.Facts;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace _App.Runtime.Screens
 {
-    public class WeatherScreen : BaseScreen
+    public class FactsScreen : BaseScreen
     {
-        [SerializeField, Required] private WeatherPresenter _presenter;
-        [SerializeField, Required] private WeatherView _view;
+        [Inject] private IFactsPresenter _presenter;
+        
+        [SerializeField, Required] private FactsView _view;
+        
         protected override void OnWillShow()
         {
             base.OnWillShow();
             _presenter.Initialize(_view);
-            _presenter.StartWeatherUpdates();
         }
         
         protected override void OnHide()
         {
             base.OnHide();
-            _presenter.StopWeatherUpdates();
+            _presenter.Dispose();
         }
 
         private void OnDestroy()

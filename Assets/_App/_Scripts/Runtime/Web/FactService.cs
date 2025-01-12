@@ -1,44 +1,96 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using _App.Runtime.UI.Facts;
+using _App.Runtime.Web.DTO;
 using Cysharp.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+using JetBrains.Annotations;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace _App.Runtime.Web
 {
-    public class FactService
+    [UsedImplicitly]
+    public class FactService : IFactService
     {
-        private const string FactsApiUrl = "https://dogapi.dog/api/v2/breeds";
+        private const string BaseApiUrl = "https://dogapi.dog/api/v2/";
 
-        public async UniTask<string[]> GetFactsAsync(CancellationToken cancellationToken)
+        private const string BreedsEndpoint = "breeds";
+
+
+        public async UniTask<List<BreedModel>> GetBreedsListAsync(CancellationToken cancellationToken)
         {
             try
             {
-                using var request = UnityWebRequest.Get(FactsApiUrl);
+                var url = $"{BaseApiUrl}{BreedsEndpoint}";
+                using var request = UnityWebRequest.Get(url);
                 var operation = await request.SendWebRequest().WithCancellation(cancellationToken);
 
                 if (operation.result == UnityWebRequest.Result.Success)
                 {
-                    var json = JObject.Parse(request.downloadHandler.text);
-                    var breeds = json["data"];
-                    string[] facts = breeds?.Select(b => b["attributes"]["name"]?.ToString()).Take(10).ToArray();
+                    var response = JsonConvert.DeserializeObject<DTOs.BreedsListResponse>(request.downloadHandler.text);
+
+                    var facts = response.Data.Select(breed => new BreedModel
+                        {
+                            Id = breed.Id,
+                            Name = breed.Attributes.Name,
+                            Description = breed.Attributes.Description,
+                            Hypoallergenic = breed.Attributes.Hypoallergenic
+                        })
+                        .ToList();
+
                     return facts;
                 }
 
                 Debug.LogError($"Facts API error: {request.error}");
-                return Array.Empty<string>();
+                return new List<BreedModel>();
             }
             catch (OperationCanceledException)
             {
                 Debug.Log("Facts request cancelled.");
-                return Array.Empty<string>();
+                return new List<BreedModel>();
             }
             catch (Exception ex)
             {
                 Debug.LogError($"Unexpected error: {ex.Message}");
-                return Array.Empty<string>();
+                return new List<BreedModel>();
+            }
+        }
+
+        public async UniTask<DTOs.Breed> GetBreedByIdAsync(string id, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentException("Breed ID cannot be null or empty", nameof(id));
+            }
+
+            string url = $"{BaseApiUrl}{BreedsEndpoint}/{id}";
+
+            try
+            {
+                using var request = UnityWebRequest.Get(url);
+                var operation = await request.SendWebRequest().WithCancellation(cancellationToken);
+
+                if (operation.result == UnityWebRequest.Result.Success)
+                {
+                    var breed = JsonConvert.DeserializeObject<DTOs.BreedResponse>(request.downloadHandler.text);
+                    return breed.Data;
+                }
+
+                Debug.LogError($"Failed to fetch breed with ID {id}: {request.error}");
+                return null;
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log($"Request for breed with ID {id} was cancelled.");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Unexpected error while fetching breed with ID {id}: {ex.Message}");
+                return null;
             }
         }
     }

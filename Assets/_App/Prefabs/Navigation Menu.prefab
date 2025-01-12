@@ -141,8 +141,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6090995061816168565}
   - component: {fileID: 3263517770544176306}
-  - component: {fileID: 9216418241924975038}
-  - component: {fileID: 876914855377018897}
   m_Layer: 5
   m_Name: Navigation Menu
   m_TagString: Untagged
@@ -185,37 +183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bar: {fileID: 292798548440382045}
   screensRoot: {fileID: 2808532505707923337}
---- !u!114 &9216418241924975038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5727385612389291024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ecbd07b51f648269e17f55bacf5ec98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navigationMenuController: {fileID: 3263517770544176306}
---- !u!114 &876914855377018897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5727385612389291024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 9216418241924975038}
-  _installerPrefabs: []
-  _autoRun: 1
-  _kernel: {fileID: 0}
 --- !u!1 &8141432863799020053
 GameObject:
   m_ObjectHideFlags: 0

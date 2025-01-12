@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using _App.Runtime.Services;
+using _App.Runtime.UI.Presenters;
 using _App.Runtime.Web;
 using Cysharp.Threading.Tasks;
 using UniRx;
@@ -11,16 +12,16 @@ using Zenject;
 namespace _App.Runtime.Controllers
 {
     [Serializable]
-    public struct WeatherPresenterSettings
+    public class WeatherPresenterSettings
     {
-        public float UpdateInterval;
+        public float updateInterval = 5f;
     }
     
     public class WeatherPresenter : MonoBehaviour, IDisposable
     {
-        [Inject] private RequestQueueManager _queueManager;
-        [Inject] private WeatherService _weatherService;
-        [Inject] private ISpriteLoader _spriteLoader;
+        private RequestQueueManager _queueManager;
+        private IWeatherService _weatherService;
+        private ISpriteLoader _spriteLoader;
 
         [SerializeField] private WeatherPresenterSettings _config;
 
@@ -36,8 +37,16 @@ namespace _App.Runtime.Controllers
         private CancellationTokenSource _weatherCancellationToken;
         
         private readonly CompositeDisposable _disposables = new();
+        
+        [Inject]
+        private void Construct(RequestQueueManager queueManager, IWeatherService weatherService, ISpriteLoader spriteLoader)
+        {
+            _queueManager = queueManager;
+            _weatherService = weatherService;
+            _spriteLoader = spriteLoader;
+        }
 
-        public void Initialize(WeatherView view)
+        public void Initialize(IWeatherView view)
         {
             _disposables.Clear();
             
@@ -46,6 +55,7 @@ namespace _App.Runtime.Controllers
                 .AddTo(_disposables);
             
             _isLoading
+                .Where(_ => !_icon.HasValue)
                 .Subscribe(view.SetLoading)
                 .AddTo(_disposables);
             
@@ -63,7 +73,7 @@ namespace _App.Runtime.Controllers
             _isLoading.Value = true;
             
             Observable
-                .Interval(TimeSpan.FromSeconds(_config.UpdateInterval))
+                .Interval(TimeSpan.FromSeconds(_config.updateInterval))
                 .Subscribe( _ => RequestWeatherUpdate())
                 .AddTo(_weatherCancellationToken.Token);
         }

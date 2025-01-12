@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _App.Runtime.Controllers
+namespace _App.Runtime.UI.Presenters
 {
-    public class WeatherView : MonoBehaviour  
+    public class WeatherView : MonoBehaviour, IWeatherView
     {
         [SerializeField, Required] private TMP_Text _temperatureText;
         [SerializeField, Required] private Image _icon;

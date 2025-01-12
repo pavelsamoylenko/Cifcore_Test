@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 namespace _App.Runtime.Web
 {
     [UsedImplicitly]
-    public class WeatherService
+    public class WeatherService : IWeatherService
     {
         private const string WeatherApiUrl = "https://api.weather.gov/gridpoints/TOP/32,81/forecast";
 
@@ -63,5 +63,10 @@ namespace _App.Runtime.Web
                 return new List<WeatherForecast>();
             }
         }
+    }
+
+    public interface IWeatherService
+    {
+        UniTask<IList<WeatherForecast>> GetWeatherForecastAsync(CancellationToken cancellationToken);
     }
 }

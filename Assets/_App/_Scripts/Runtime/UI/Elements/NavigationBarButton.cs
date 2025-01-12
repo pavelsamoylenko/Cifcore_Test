@@ -28,5 +28,10 @@ namespace _App.Runtime.UI.Elements
             if (toggle.isOn) toggle.isOn = false; // For force toggle notification
             toggle.isOn = true;
         }
+        internal void SetIcon(Sprite icon = null)
+        {
+            toggleImage.sprite = icon;
+            toggleImage.color = icon != null ?  Color.white : Color.clear;
+        }
     }
 }

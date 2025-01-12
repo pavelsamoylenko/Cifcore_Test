@@ -512,8 +512,8 @@ MonoBehaviour:
   id: weather
   _canvasGroup: {fileID: 6367041893009086657}
   buttonData:
-    buttonColor: {r: 0, g: 0, b: 1, a: 1}
-    icon: {fileID: 0}
+    buttonColor: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
+    icon: {fileID: 21300000, guid: 10d19c80a369c490fa0bbef3a79ed695, type: 3}
   parentController: {fileID: 0}
   _presenter: {fileID: 4940724721960111525}
   _view: {fileID: 1998637124873668102}

@@ -22,31 +22,16 @@ namespace _App.Runtime.Web
             }
         }
 
-        public void CancelRequest(string requestId)
-        {
-            if (requestId == null) return;
-
-            // Создаем временную очередь, исключая элемент с данным requestId
-            var newQueue = new ConcurrentQueue<RequestWrapper>(_requestQueue.Where(wrapper => wrapper.Id != requestId));
-
-            // Перезаписываем очередь
-            while (_requestQueue.TryDequeue(out _)) { } // Очистка старой очереди
-            foreach (var wrapper in newQueue)
-            {
-                _requestQueue.Enqueue(wrapper); // Заполняем заново
-            }
-        }
-
-        public void CancelAllRequests()
-        {
-            _cts.Cancel();
-            _isProcessing = false;
-            _cts.Dispose();
-        }
-
         public void Dispose()
         {
             CancelAllRequests();
+        }
+
+        private void CancelAllRequests()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _isProcessing = false;
         }
 
         private async UniTaskVoid ProcessQueue()

@@ -75,3 +75,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screensDatabase: {fileID: 11400000, guid: 9211c332c2b6a40a3b94160c81e2dce1, type: 2}
+  popupService: {fileID: 3076826940918434821, guid: fdf3f4c61f5044b9eacdd712c65e082d, type: 3}

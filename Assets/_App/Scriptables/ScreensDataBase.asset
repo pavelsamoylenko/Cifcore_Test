@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: ScreensDataBase
   m_EditorClassIdentifier: 
   screens:
-  - {fileID: 5034475043146578000, guid: 4f29464d0e80942bea875d134c1d6bf3, type: 3}
-  - {fileID: 8790673415029560096, guid: 0312c0831427141b289e549ea1776ecc, type: 3}
-  - {fileID: 5836702195521533918, guid: a8703193b84614320b7382810acf9dfa, type: 3}
   - {fileID: 5559718865249453974, guid: aa62c6f056f844dae802c75e452d74b3, type: 3}
+  - {fileID: 2200172293088340060, guid: 0f84c44ddcd1a4359aa8ffad3cc2d7db, type: 3}

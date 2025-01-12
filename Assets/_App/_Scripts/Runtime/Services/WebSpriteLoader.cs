@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using _App.Runtime.Web;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -8,13 +9,14 @@ using Zenject;
 namespace _App.Runtime.Services
 {
     
-    
     public class WebSpriteLoader : ISpriteLoader
     {
+        private readonly RequestQueueManager _queueManager;
         private Sprite _defaultIcon;
         
-        public WebSpriteLoader([Inject(Id = "DEFAULT_SPRITE", Optional = true)] Sprite defaultIcon = null)
+        public WebSpriteLoader(RequestQueueManager queueManager, [Inject(Id = "DEFAULT_SPRITE", Optional = true)] Sprite defaultIcon = null)
         {
+            _queueManager = queueManager;
             _defaultIcon = defaultIcon;
         }
         

@@ -15,6 +15,7 @@ namespace _App.Runtime.UI
             
             button.Color = screen.ButtonData.Color;
             button.ToggleGroup = toggleGroup;
+            button.SetIcon(screen.ButtonData.Icon);
             
             return button;
         }
