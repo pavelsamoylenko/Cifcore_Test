@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using _App.Runtime.UI.Weather.Models;
+using _App.Runtime.Web;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace _App.Runtime.Web
+namespace _App.Runtime.Services
 {
     [UsedImplicitly]
     public class WeatherProvider  : IWeatherProvider

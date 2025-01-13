@@ -1,4 +1,4 @@
-using _App.Runtime.UI.Base;
+using _App.Runtime.Screens.Base;
 using DG.Tweening;
 using UnityEngine;
 

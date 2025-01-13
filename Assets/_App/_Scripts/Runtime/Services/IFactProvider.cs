@@ -4,7 +4,7 @@ using _App.Runtime.UI.Facts;
 using _App.Runtime.Web.DTO;
 using Cysharp.Threading.Tasks;
 
-namespace _App.Runtime.Web
+namespace _App.Runtime.Services
 {
     public interface IFactProvider
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace _App.Runtime.UI.Data
+namespace _App.Runtime.Screens.Data
 {
     /// <summary>
     /// Setup of screens in navigation menu. Can be used to control screen sets dynamically (e.g. when new screens are added, changing orders or for A/B testing).

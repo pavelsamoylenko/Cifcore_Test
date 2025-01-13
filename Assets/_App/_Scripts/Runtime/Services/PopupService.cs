@@ -1,7 +1,8 @@
+using _App.Runtime.UI.Popup;
 using UnityEngine;
 using Zenject;
 
-namespace _App.Runtime.UI.Popup
+namespace _App.Runtime.Services
 {
     public class PopupService : MonoBehaviour
     {

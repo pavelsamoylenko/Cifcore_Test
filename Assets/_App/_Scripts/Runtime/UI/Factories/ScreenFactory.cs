@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using _App.Runtime.UI.Base;
+using _App.Runtime.Screens.Base;
+using _App.Runtime.Screens.Data;
 using _App.Runtime.UI.Data;
 using UnityEngine;
 using Zenject;

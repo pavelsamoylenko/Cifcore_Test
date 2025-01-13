@@ -1,12 +1,10 @@
+using _App.Runtime.Screens.Data;
 using _App.Runtime.Services;
-using _App.Runtime.UI.Data;
-using _App.Runtime.UI.Factories;
-using _App.Runtime.UI.Popup;
 using _App.Runtime.Web;
 using UnityEngine;
 using Zenject;
 
-namespace _App.Runtime
+namespace _App.Runtime.Installers
 {
     public class ProjectInstaller : MonoInstaller
     {

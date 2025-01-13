@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using _App.Runtime.UI.Facts;
+using _App.Runtime.Web;
 using _App.Runtime.Web.DTO;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace _App.Runtime.Web
+namespace _App.Runtime.Services
 {
     [UsedImplicitly]
     public class FactProvider : IFactProvider

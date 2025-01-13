@@ -2,14 +2,12 @@ using System;
 using System.Linq;
 using System.Threading;
 using _App.Runtime.Services;
-using _App.Runtime.UI.Presenters;
-using _App.Runtime.Web;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace _App.Runtime.Controllers
+namespace _App.Runtime.UI.Weather
 {
     [Serializable]
     public class WeatherPresenterSettings

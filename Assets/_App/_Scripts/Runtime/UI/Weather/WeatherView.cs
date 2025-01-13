@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _App.Runtime.UI.Presenters
+namespace _App.Runtime.UI.Weather
 {
     public class WeatherView : MonoBehaviour, IWeatherView
     {

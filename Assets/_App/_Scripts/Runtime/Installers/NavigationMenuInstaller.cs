@@ -2,7 +2,7 @@ using _App.Runtime.UI;
 using UnityEngine;
 using Zenject;
 
-namespace _App.Runtime
+namespace _App.Runtime.Installers
 {
     public class NavigationMenuInstaller : MonoInstaller
     {

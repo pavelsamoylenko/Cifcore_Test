@@ -1,7 +1,7 @@
-using _App.Runtime.Web;
+using _App.Runtime.Services;
 using Zenject;
 
-namespace _App.Runtime
+namespace _App.Runtime.Installers
 {
     public class MainSceneInstaller : MonoInstaller
     {

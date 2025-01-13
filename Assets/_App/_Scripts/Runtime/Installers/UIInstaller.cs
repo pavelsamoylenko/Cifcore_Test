@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace _App.Runtime
+namespace _App.Runtime.Installers
 {
     public class UIInstaller : MonoInstaller
     {

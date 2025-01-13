@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _App.Runtime.UI.Presenters
+namespace _App.Runtime.UI.Weather
 {
     public interface IWeatherView
     {

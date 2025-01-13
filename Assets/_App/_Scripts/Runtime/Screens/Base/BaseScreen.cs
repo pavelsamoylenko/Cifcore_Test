@@ -1,11 +1,12 @@
 using System;
+using _App.Runtime.UI;
 using _App.Runtime.UI.Data;
 using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace _App.Runtime.UI.Base
+namespace _App.Runtime.Screens.Base
 {
     public abstract class BaseScreen : MonoBehaviour
     {
