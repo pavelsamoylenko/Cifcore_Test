@@ -73,6 +73,8 @@ namespace _App.Runtime.UI.Weather
             
             _isLoading.Value = true;
             
+            RequestWeatherUpdate();
+            
             Observable
                 .Interval(TimeSpan.FromSeconds(_config.updateInterval))
                 .Subscribe( _ => RequestWeatherUpdate())
