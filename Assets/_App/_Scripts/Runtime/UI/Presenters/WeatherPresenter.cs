@@ -78,7 +78,7 @@ namespace _App.Runtime.Controllers
             Observable
                 .Interval(TimeSpan.FromSeconds(_config.updateInterval))
                 .Subscribe( _ => RequestWeatherUpdate())
-                .AddTo(_weatherCancellationToken.Token);
+                .AddTo(_disposables);
         }
 
         public void StopWeatherUpdates()
@@ -86,6 +86,8 @@ namespace _App.Runtime.Controllers
             _weatherCancellationToken?.Cancel();
             _weatherCancellationToken?.Dispose();
             _weatherCancellationToken = null;
+            _disposables.Clear();
+            
             _isLoading.Value = false;
         }
 
@@ -119,7 +121,6 @@ namespace _App.Runtime.Controllers
         public void Dispose()
         {
             StopWeatherUpdates();
-            _disposables.Clear();
         }
     }
     
